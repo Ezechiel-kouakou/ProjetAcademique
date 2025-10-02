@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoValo</title>
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --primary: linear-gradient(135deg, var(--dark) 0%, #2ecc71 100%);
+
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+        
+        .btn {
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--light) 0%,#2ecc71 100%);
+            border-color:#F7FFF7;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 119, 60, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--dark);
+            border-color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #2ecc71;
+            border-color:#2ecc71;
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+        }
+        
+        .navbar {
+            padding: 15px 0;
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%)(113, 228, 152, 0.95) !important;
+        }
+        
+        
+        .navbar-brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: -1px;
+        }
+        
+        .navbar-brand span {
+              color:#2ecc71
+            
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 10px 15px !important;
+            margin: 0 5px;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 15px;
+            right: 15px;
+            height: 2px;
+            background-color: var(--dark);
+            transform: scaleX(0);
+            transition: 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .hero-section {
+            padding: 100px 0 80px;
+            background-color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 60%;
+            height: 110%;
+            background-color: var(--primary);
+            border-radius: 60% 20% 70% 40%;
+            opacity: 0.07;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+        
+        .hero-title span {
+            color: #2ecc71;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-title span::after {
+            content: none;
+            
+        }
+        
+        .card {
+            border-radius: 20px;
+            border: none;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .feature-card {
+            padding: 30px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color:#F7FFF7;
+        }
+        
+        .bg-primary-light {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: var(--primary);
+        }
+        
+        .bg-secondary-light {
+            background-color: rgba(78, 205, 196, 0.1);
+            color: var(--secondary);
+        }
+        
+        .bg-accent-light {
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+        }
+        
+        .section-title {
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .stats-box {
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            color:black;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .stats-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+        }
+        
+        .stats-number {
+            transition: color 0.3s ease;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0;
+            line-height: 1;
+            color: #000;
+        }
+    
+        .testimonial-card {
+            padding: 30px;
+            border-radius: 20px;
+            background-color: white;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-quote {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: var(--primary);
+            opacity: 0.2;
+            font-size: 3rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--secondary) 0%, #2EAFAA 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-blob {
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 60%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 60% 70% 40% 50%;
+            z-index: 0;
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #292F36;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .price-tag {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+        }
+        
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+        }
+        
+        .floating-cta .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .badge-eco {
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            color: white;
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 50px;
+        }
+        
+        .badge-promo {
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            color: var(--dark);
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            border-radius: 50px;
+        }
+        
+        .impact-counter {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--light) 0%, #2ecc71 100%);
+            box-shadow: 0 15px 30px (0,0,0,0.1);
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+            color:#000
+        }
+        
+        .fruit-blob {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.1;
+        }
+        
+        .blob-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-20deg);
+            font-size: 8rem;
+            color: var(--primary);
+        }
+        
+        .blob-2 {
+            top: 60%;
+            right: 5%;
+            transform: rotate(15deg);
+            font-size: 6rem;
+            color: var(--secondary);
+        }
+        
+        .blob-3 {
+            bottom: 10%;
+            left: 20%;
+            transform: rotate(35deg);
+            font-size: 5rem;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="language-selector">
+        <div class="dropdown">
+            <button class="btn btn-sm btn-light shadow-sm dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-globe">langue</i> 
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item" href="#" onclick="changeLanguage('fr')">Français</a></li>
+                <li><a class="dropdown-item" href="#" onclick="changeLanguage('en')">English</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Floating CTA -->
+    <div class="floating-cta">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cartModal">
+            <i class="fas fa-shopping-basket"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartBadge">
+            </span>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Eco<span>Valo</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#mission">Mission</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#impact">Impact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#squad">La Squad</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Aide">Besoin d'Aide ? </a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary" href="#shop">
+                            Commander <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <i class="fas fa-apple-alt fruit-blob blob-1"></i>
+        <i class="fas fa-carrot fruit-blob blob-2"></i>
+        <i class="fas fa-lemon fruit-blob blob-3"></i>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <span class="badge bg-primary mb-3 py-2 px-3">Anti-gaspillage 🌱</span>
+                    <h1 class="hero-title">On s'en fout si c'est <span>moche</span>, tant que c'est bon !</h1>
+                    <p class="lead mb-4">Des fruits et légumes pas esthétiques à -30% pour ton budget et pour la planète. Livraison directe chez toi ou ton campus !</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#shop" class="btn btn-primary">
+                            Commander maintenant <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#mission" class="btn btn-outline-dark">
+                            Notre mission <i class="fas fa-leaf ms-2"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpweGH0MHoDRFMlr2w9o_ZXqZsAf39Od-6VQ&s"class="img-fluid rounded"alt="image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Counter -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="impact-counter shadow">
+                    <div class="row text-center g-4">
+                        <div class="col-md-4">
+                            <h3 class="stats-number text-primary" id="savedCounter">1,245</h3>
+                            <p class="mb-0 text-uppercase fw-bold">kg sauvés du gaspillage</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="stats-number text-primary" id="co2Counter">325</h3>
+                            <p class="mb-0 text-uppercase fw-bold">kg CO₂ évités</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3 class="stats-number text-primary" id="membersCounter">412</h3>
+                            <p class="mb-0 text-uppercase fw-bold">étudiants conquis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission Section -->
+    <section id="mission" class="py-5 mt-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="https://media.istockphoto.com/id/1066557736/fr/photo/passionn%C3%A9s-par-leur-projet.jpg?s=612x612&w=0&k=20&c=MIQhuLHvSvED44mhuE-XQ0JhwFGwEUcwNtdhvgyiP7A=" alt="Notre mission" class="img-fluid rounded-4 shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Notre mission</h2>
+                    <p class="lead mb-4">Oublie ce que t'as appris. Les meilleurs fruits et légumes ne sont pas toujours les plus beaux !</p>
+                    
+                    <div class="mb-4">
+                        <h5 class="fw-bold mb-3">✨ Pourquoi on existe</h5>
+                        <p>30% des fruits et légumes sont jetés juste parce qu'ils ne rentrent pas dans les "standards" de beauté. C'est n'importe quoi et on veut changer ça !</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="fw-bold mb-3">🌍 Ce qu'on fait</h5>
+                        <p>On récupère ces fruits et légumes bizarres auprès des producteurs locaux et on te les livre directement, à prix réduit. C'est gagnant-gagnant pour tout le monde.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5 class="fw-bold mb-3">💪 Notre promesse</h5>
+                        <p>Même goût, même qualité, même nutrition. La seule différence ? Ils sont moins chers et ils ont plus de personnalité !</p>
+                    </div>
+                    
+                    <a href="#shop" class="btn btn-primary">
+                        Passer à l'action <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold mb-3">Comment ça marche ?</h2>
+                <p class="lead">En 3 étapes simples, mange mieux et moins cher</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-primary-light mx-auto">
+                            <i class="fas fa-shopping-basket"></i>
+                        </div>
+                        <h4 class="mb-3">1. Choisis ton panier</h4>
+                        <p class="mb-0">Sélectionne le panier qui correspond à tes besoins et ton budget. On a même des formules spéciales étudiants !</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-secondary-light mx-auto">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4 class="mb-3">2. On te livre</h4>
+                        <p class="mb-0">Livraison chez toi, en résidence étudiante ou sur ton campus. Rapide et pas cher !</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-accent-light mx-auto">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4 class="mb-3">3. Savoure & Partage</h4>
+                        <p class="mb-0">Régale-toi et partage tes créations avec le hashtag #FruiMoches pour gagner des réducs !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Nos offres de la semaine</h2>
+            <p class="lead mb-5">Des fruits et légumes frais, de saison, à prix mini</p>
+            
+            <div class="row g-4">
+                <!-- Product 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 position-relative">
+                        <span class="badge-promo">FORMULE AU KG</span>
+                        <img src="https://www.saveursetvie.fr/wp-content/uploads/2024/06/5ce3e526-1d64-4438-b970-e936d9239dd9-seniorsconsommezcinqfruitslegumesparjour7b17f81dd2.webp" alt="Panier Solo" class="card-img-top">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title fw-bold mb-0">Achétez au kg </h5>
+                                <span class="badge-eco">
+                                    <i class="fas fa-leaf me-1"></i> 2kg sauvés
+                                </span>
+                            </div>
+                            <p class="card-text">Le panier parfait pour une personne. Assez de fruits et légumes moches mais délicieux pour toute ta semaine.</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted"></span>
+                                    <span class="fw-bold fs-4 ms-2,">3,50€</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="addToCart('Panier Solo', 10.90)">
+                                    Ajouter <i class="fas fa-plus ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 position-relative">
+                        <span class="badge-promo">BESTSELLER</span>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3a-x_SXCR2P_RDHH_SA48kHGdHt_zW_dLow&s" alt="Panier Coloc" class="card-img-top">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title fw-bold mb-0">Panier Coloc</h5>
+                                <span class="badge-eco">
+                                    <i class="fas fa-leaf me-1"></i> 4kg sauvés
+                                </span>
+                            </div>
+                            <p class="card-text">Idéal pour les colocations ou couples. Une variété de fruits et légumes moches mais plein de goût !</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted"></span>
+                                    <span class="fw-bold fs-4 ms-2,">18,90€</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="addToCart('Panier Coloc', 18.90)">
+                                    Ajouter <i class="fas fa-plus ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 position-relative">
+                        <span class="badge-promo">NOUVEAU</span>
+                        <img src="https://cdn-s-www.leprogres.fr/images/4ca78477-1737-43cc-aff6-f74ed1ce96c1/NW_raw/youssouf-et-marcel-preparent-quatre-types-de-paniers-de-4-ou-8-kg-fruits-et-legumes-melanges-ou-separes-photo-progres-florence-villard-1644504322.jpg" alt="Panier Cuisine" class="card-img-top">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title fw-bold mb-0">Panier Cuisine</h5>
+                                <span class="badge-eco">
+                                    <i class="fas fa-leaf me-1"></i> 3kg sauvés
+                                </span>
+                            </div>
+                            <p class="card-text">Pour les passionnés de cuisine. Des légumes aux formes originales parfaits pour impressionner tes invités !</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <div>
+                                    <span class="text-decoration-line-through text-muted"></span>
+                                    <span class="fw-bold fs-4 ms-2,">15,90€</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="addToCart('Panier Cuisine', 15.90)">
+                                    Ajouter <i class="fas fa-plus ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button class="btn btn-outline-primary" id="loadMoreBtn">
+                    Afficher plus <i class="fas fa-chevron-down ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2 class="section-title">Ton impact</h2>
+                    <p class="lead mb-4">Chaque panier que tu commandes fait vraiment la différence !</p>
+                    
+                    <div class="stats-box mb-4">
+                        <div class="row text-center g-4">
+                            <div class="col-6">
+                                <p class="stats-number">30%</p>
+                                <p class="mb-0">des fruits et légumes sont jetés pour leur apparence</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="stats-number">8%</p>
+                                <p class="mb-0">des émissions de CO₂ sont liées au gaspillage alimentaire</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rounded bg-white p-4 shadow-sm">
+                        <h5 class="fw-bold mb-3">Calcule ton impact</h5>
+                        <div class="mb-3">
+                            <label for="productSelect" class="form-label">Ton panier préféré</label>
+                            <select class="form-select" id="productSelect">
+                                <option value="1">Panier Solo (2kg)</option>
+                                <option value="2">Panier Coloc (4kg)</option>
+                                <option value="3">Panier Cuisine (3kg)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="frequencySelect" class="form-label">Fréquence de commande
